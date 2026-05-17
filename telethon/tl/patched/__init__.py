@@ -18,3 +18,7 @@ class Message(_Message, types.Message):
 
 types.Message = Message
 alltlobjects.tlobjects[Message.CONSTRUCTOR_ID] = Message
+
+# Register old constructor IDs so sessions that haven't re-negotiated the
+# layer yet (Telegram still sends the previous schema) keep working.
+alltlobjects.tlobjects[0x9cb490e9] = Message  # message pre-layer 223 (without from_rank)
